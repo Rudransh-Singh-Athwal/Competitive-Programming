@@ -1,37 +1,42 @@
 // https://codeforces.com/problemset/problem/894/A
 // QAQ
-// Codeforces 894A -> QAQ
 
 #include <bits/stdc++.h>
 using namespace std;
 
-int fn(int index, string &input, string targetString, string curr)
+int fn(int index, int pos, string &inputString, string targetString, vector<vector<int>> &dp)
 {
-  if (curr.length() == 3)
-  {
-    return curr == targetString ? 1 : 0;
-  }
-  if (index >= input.length())
-  {
-    return curr == targetString ? 1 : 0;
-  }
+  if (pos == targetString.length())
+    return 1;
 
-  int notPick = fn(index + 1, input, targetString, curr);
+  if (index >= inputString.length())
+    return 0;
+
+  if (dp[index][pos] != -1)
+    return dp[index][pos];
+
+  int notPick = fn(index + 1, pos, inputString, targetString, dp);
   int pick = 0;
-  if (input[index] == 'Q' || input[index] == 'A')
+  if (inputString[index] == targetString[pos])
   {
-    pick = fn(index + 1, input, targetString, curr + input[index]);
+    pick = fn(index + 1, pos + 1, inputString, targetString, dp);
   }
 
-  return pick + notPick;
+  return dp[index][pos] = pick + notPick;
 }
 
 int main()
 {
-  string input;
-  cin >> input;
+  string inputString;
+  cin >> inputString;
+  int n = inputString.length();
 
-  int ans = fn(0, input, "QAQ", "");
+  string targetString = "QAQ";
+  int m = targetString.length();
+
+  vector<vector<int>> dp(n, vector<int>(m, -1));
+
+  int ans = fn(0, 0, inputString, targetString, dp);
 
   cout << ans << endl;
 
