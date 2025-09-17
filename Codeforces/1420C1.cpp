@@ -2,18 +2,22 @@
 // Pokémon Army (easy version)
 // Codeforces 1420C1 -> Pokémon Army (easy version)
 
+#define ll long long
 #include <bits/stdc++.h>
 using namespace std;
 
-int fn(int index, bool flag, vector<int> &strength, vector<vector<bool>> &dp)
+ll fn(int index, bool flag, vector<int> &strength, vector<vector<ll>> &dp)
 {
   if (index == strength.size())
   {
     return 0;
   }
 
-  int notPick = fn(index + 1, flag, strength, dp);
-  int pick = 0;
+  if (dp[index][flag] != -1)
+    return dp[index][flag];
+
+  ll notPick = fn(index + 1, flag, strength, dp);
+  ll pick = 0;
   if (flag)
   {
     pick = fn(index + 1, !flag, strength, dp) + strength[index];
@@ -23,7 +27,7 @@ int fn(int index, bool flag, vector<int> &strength, vector<vector<bool>> &dp)
     pick = fn(index + 1, !flag, strength, dp) - strength[index];
   }
 
-  return max(pick, notPick);
+  return dp[index][flag] = max(pick, notPick);
 }
 
 int main()
@@ -31,8 +35,6 @@ int main()
   vector<vector<int>> input;
   int n;
   cin >> n;
-
-  vector<vector<bool>> dp(n, vector<bool>(2, -1));
 
   for (int i = 0; i < n; i++)
   {
@@ -48,9 +50,10 @@ int main()
     input.push_back(temp);
   }
 
-  for (auto it : input)
+  for (auto strength : input)
   {
-    int ans = fn(0, true, it, dp);
+    vector<vector<ll>> dp(strength.size(), vector<ll>(2, -1));
+    ll ans = fn(0, true, strength, dp);
     cout << ans << endl;
   }
 
