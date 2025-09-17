@@ -6,30 +6,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-ll fn(int index, bool flag, vector<int> &strength, vector<vector<ll>> &dp)
-{
-  if (index == strength.size())
-  {
-    return 0;
-  }
-
-  if (dp[index][flag] != -1)
-    return dp[index][flag];
-
-  ll notPick = fn(index + 1, flag, strength, dp);
-  ll pick = 0;
-  if (flag)
-  {
-    pick = fn(index + 1, !flag, strength, dp) + strength[index];
-  }
-  else
-  {
-    pick = fn(index + 1, !flag, strength, dp) - strength[index];
-  }
-
-  return dp[index][flag] = max(pick, notPick);
-}
-
 int main()
 {
   vector<vector<int>> input;
@@ -52,8 +28,28 @@ int main()
 
   for (auto strength : input)
   {
-    vector<vector<ll>> dp(strength.size(), vector<ll>(2, -1));
-    ll ans = fn(0, true, strength, dp);
+    vector<vector<ll>> dp(strength.size() + 1, vector<ll>(2, 0));
+
+    for (int index = strength.size() - 1; index >= 0; index--)
+    {
+      for (int flag = 0; flag <= 1; flag++)
+      {
+        ll notPick = dp[index + 1][flag];
+        ll pick = 0;
+        if (flag)
+        {
+          pick = dp[index + 1][!flag] + strength[index];
+        }
+        else
+        {
+          pick = dp[index + 1][!flag] - strength[index];
+        }
+
+        dp[index][flag] = max(pick, notPick);
+      }
+    }
+
+    ll ans = dp[0][true];
     cout << ans << endl;
   }
 
