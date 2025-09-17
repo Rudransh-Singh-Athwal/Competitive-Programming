@@ -7,14 +7,14 @@ using namespace std;
 
 int fn(int index, int dividend, vector<int> &nums)
 {
-  if (index < 0)
+  if (index == 0)
     return 0;
 
   int notPick = fn(index - 1, dividend, nums);
   int pick = 0;
-  if ((dividend == -1) || (dividend % nums[index] == 0))
+  if ((dividend == -1) || (dividend % nums[index - 1] == 0))
   {
-    pick = 1 + fn(index - 1, nums[index], nums);
+    pick = 1 + fn(index - 1, nums[index - 1], nums);
   }
 
   return max(pick, notPick);
@@ -42,7 +42,7 @@ int main()
 
   for (auto vec : input)
   {
-    int ans = fn(vec.size() - 1, -1, vec);
+    int ans = fn(vec.size(), -1, vec);
     cout << ans << endl;
   }
 
