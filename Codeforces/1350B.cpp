@@ -5,20 +5,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int fn(int index, int dividend, vector<int> &nums, vector<vector<int>> &dp)
+int fn(int index, int dividend, vector<int> &nums)
 {
   if (index < 0)
     return 0;
 
-  int notPick = fn(index - 1, dividend, nums, dp);
+  int notPick = fn(index - 1, dividend, nums);
   int pick = 0;
   if ((dividend == -1) || (dividend % nums[index] == 0))
   {
-    pick = 1 + fn(index - 1, nums[index], nums, dp);
+    pick = 1 + fn(index - 1, nums[index], nums);
   }
 
   return max(pick, notPick);
-  // return dp[index][dividend] = max(pick, notPick);
 }
 
 int main()
@@ -26,7 +25,6 @@ int main()
   int n;
   cin >> n;
   vector<vector<int>> input;
-  vector<vector<int>> dp(n, vector<int>(2, -1));
 
   for (int i = 0; i < n; i++)
   {
@@ -44,7 +42,7 @@ int main()
 
   for (auto vec : input)
   {
-    int ans = fn(vec.size() - 1, -1, vec, dp);
+    int ans = fn(vec.size() - 1, -1, vec);
     cout << ans << endl;
   }
 
