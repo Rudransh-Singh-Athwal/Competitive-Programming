@@ -28,28 +28,30 @@ int main()
 
   for (auto strength : input)
   {
-    vector<vector<ll>> dp(strength.size() + 1, vector<ll>(2, 0));
+    vector<ll> next(2, 0);
+    vector<ll> curr(2, 0);
 
     for (int index = strength.size() - 1; index >= 0; index--)
     {
       for (int flag = 0; flag <= 1; flag++)
       {
-        ll notPick = dp[index + 1][flag];
+        ll notPick = next[flag];
         ll pick = 0;
         if (flag)
         {
-          pick = dp[index + 1][!flag] + strength[index];
+          pick = next[!flag] + strength[index];
         }
         else
         {
-          pick = dp[index + 1][!flag] - strength[index];
+          pick = next[!flag] - strength[index];
         }
 
-        dp[index][flag] = max(pick, notPick);
+        curr[flag] = max(pick, notPick);
       }
+      next = curr;
     }
 
-    ll ans = dp[0][true];
+    ll ans = next[true];
     cout << ans << endl;
   }
 
