@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/116/A
 // Tram
-// Codeforces 116A -> Tram
 
 #include <bits/stdc++.h>
 using namespace std;
