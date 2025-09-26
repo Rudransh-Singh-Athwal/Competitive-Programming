@@ -1,45 +1,34 @@
 // https://codeforces.com/problemset/problem/1501/B
 // Napoleon Cake
-// Codeforces 1501B -> Napoleon Cake
 
 #include <bits/stdc++.h>
 using namespace std;
 
-void printMap(const unordered_map<int, bool> mp, const int n)
+void fn(const vector<int> &nums, int n)
 {
-  for (int i = 0; i < n; i++)
+  vector<int> res(n, 0);
+  int curr = 0;
+  for (int i = n - 1; i >= 0; i--)
   {
-    if (mp.count(i))
+    curr = max(curr, nums[i]);
+    if (curr > 0)
     {
-      cout << 1 << " ";
-    }
-    else
-    {
-      cout << 0 << " ";
-    }
-  }
-  cout << endl;
-}
-
-void fn(const vector<int> &nums)
-{
-  int n = nums.size();
-  unordered_map<int, bool> mp;
-  for (int i = 0; i < n; i++)
-  {
-    int layersDrenched = nums[i];
-    for (int j = i; j > max(-1, i - layersDrenched); j--)
-    {
-      if (mp.find(j) == mp.end())
-        mp[j] = true;
+      res[i] = 1;
+      curr--;
     }
   }
 
-  printMap(mp, n);
+  for (int i = 0; i < n; i++)
+  {
+    cout << res[i] << (i + 1 == n ? "\n" : " ");
+  }
 }
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
   int n;
   cin >> n;
 
@@ -61,7 +50,7 @@ int main()
 
   for (auto vec : input)
   {
-    fn(vec);
+    fn(vec, vec.size());
   }
 
   return 0;
