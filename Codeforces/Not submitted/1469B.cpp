@@ -5,27 +5,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int fn(int i, int j, int maxSum, const vector<int> &red, const int n, const vector<int> &blue, const int m)
+int fn(int i, int j, int maxSum, const vector<int> &red, const int n, const vector<int> &blue, const int m, vector<vector<int>> &dp)
 {
   if (i == n && j == m)
   {
     return maxSum;
   }
 
+  if (dp[i][j] != -1)
+    return dp[i][j];
+
   int pickRed = 0;
   int pickBlue = 0;
 
   if (i < n)
   {
-    pickRed = fn(i + 1, j, maxSum + red[i], red, n, blue, m);
+    pickRed = fn(i + 1, j, maxSum + red[i], red, n, blue, m, dp);
   }
 
   if (j < m)
   {
-    pickBlue = fn(i, j + 1, maxSum + blue[j], red, n, blue, m);
+    pickBlue = fn(i, j + 1, maxSum + blue[j], red, n, blue, m, dp);
   }
 
-  return max(maxSum, max(pickRed, pickBlue));
+  return dp[i][j] = max(maxSum, max(pickRed, pickBlue));
 }
 
 int main()
@@ -63,7 +66,8 @@ int main()
 
   for (auto it : input)
   {
-    int ans = fn(0, 0, 0, it[0], it[0].size(), it[1], it[1].size());
+    vector<vector<int>> dp(it[0].size() + 1, vector<int>(it[1].size() + 1, -1));
+    int ans = fn(0, 0, 0, it[0], it[0].size(), it[1], it[1].size(), dp);
     cout << ans << endl;
   }
 
