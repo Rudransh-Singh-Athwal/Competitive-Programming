@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/1469/B
 // Red and Blue
-// Codeforces 1469B -> Red and Blue
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -66,8 +65,10 @@ int main()
 
   for (auto it : input)
   {
-    vector<vector<int>> dp(it[0].size() + 1, vector<int>(it[1].size() + 1, -1));
-    int ans = fn(0, 0, 0, it[0], it[0].size(), it[1], it[1].size(), dp);
+    int n = it[0].size();
+    int m = it[1].size();
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
+    int ans = fn(0, 0, 0, it[0], n, it[1], m, dp);
     cout << ans << endl;
   }
 
