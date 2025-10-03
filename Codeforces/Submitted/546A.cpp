@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/546/A
 // Soldier and Bananas
-// Codeforces 546A -> Soldier and Bananas
 
 #include <bits/stdc++.h>
 using namespace std;
