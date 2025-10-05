@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/977/A
 // Wrong Subtraction
-// Codeforces 977A -> Wrong Subtraction
 
 #include <bits/stdc++.h>
 using namespace std;
