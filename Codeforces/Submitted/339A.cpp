@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/339/A
 // Helpful Maths
-// Codeforces 339A -> Helpful Maths
 
 #include <bits/stdc++.h>
 using namespace std;
