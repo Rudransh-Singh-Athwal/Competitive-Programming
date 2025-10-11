@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/313/B
 // Ilya and Queries
-// Codeforces 313B -> Ilya and Queries
 
 #include <bits/stdc++.h>
 using namespace std;
