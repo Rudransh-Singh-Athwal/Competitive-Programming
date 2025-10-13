@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/136/A
 // Presents
-// Codeforces 136A -> Presents
 
 #include <bits/stdc++.h>
 using namespace std;
