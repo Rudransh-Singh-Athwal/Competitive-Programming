@@ -5,29 +5,46 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void fn(int n, vector<int> &nums)
+long long fn(int n, vector<long long> &nums)
 {
-  stack<int> st;
-  int ans = 0;
-  bool flag = true;
-  for (int i = 1; i <= n; i++)
+  long long ans = 0;
+  int i = 0;
+  bool sub = true;
+  while (i < nums.size())
   {
-    if (flag)
+    int remaining = nums.size() - i;
+    if (remaining < n)
     {
-      st.push(nums[i - 1]);
-      if (st.size() == i)
-        flag = false;
+      int half = remaining / 2;
+      int j = 0;
+
+      // Subtract first half
+      for (; j < half; ++j, ++i)
+      {
+        ans -= nums[i];
+      }
+
+      // Add second half
+      for (; j < remaining; ++j, ++i)
+      {
+        ans += nums[i];
+      }
+
+      // Done, as all remaining elements are processed
+      break;
     }
-    else
+
+    for (int j = 0; j < n && i < nums.size(); j++, i++)
     {
-      int x = nums[i - 1];
-      int t = st.top();
-      st.pop();
-      ans += x - t;
+      if (sub)
+        ans -= nums[i];
+      else
+        ans += nums[i];
     }
+    sub = !sub;
   }
 
-  cout << ans << endl;
+  return ans;
 }
 
 int main()
@@ -39,15 +56,19 @@ int main()
   {
     int n;
     cin >> n;
-    vector<int> input;
+    vector<long long> input;
     for (int i = 0; i < (2 * n); i++)
     {
-      int x;
+      long long x;
       cin >> x;
       input.push_back(x);
     }
     sort(input.begin(), input.end());
-    fn(n, input);
+    for (int i = 1; i <= n; i++)
+    {
+      cout << fn(i, input) << " ";
+    }
+    cout << endl;
   }
   return 0;
 }
