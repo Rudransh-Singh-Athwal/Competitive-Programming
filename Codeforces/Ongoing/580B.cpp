@@ -6,29 +6,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-ll fn(int index, int prev, const int d, vector<vector<int>> &nums, vector<vector<ll>> &dp)
-{
-  if (index >= nums.size() || (prev != -1 && nums[index][0] - nums[prev][0] >= d))
-    return 0;
+// ll fn(int index, int prev, const int d, vector<vector<int>> &nums, vector<vector<ll>> &dp)
+// {
+//   if (index >= nums.size() || (prev != -1 && nums[index][0] - nums[prev][0] >= d))
+//     return 0;
 
-  if (prev != -1 && dp[index][prev] != -1)
-    return dp[index][prev];
+//   if (prev != -1 && dp[index][prev] != -1)
+//     return dp[index][prev];
 
-  ll notPick = fn(index + 1, prev, d, nums, dp);
-  ll pick = nums[index][1] + fn(index + 1, (prev == -1 ? index : prev), d, nums, dp);
+//   ll notPick = fn(index + 1, prev, d, nums, dp);
+//   ll pick = nums[index][1] + fn(index + 1, (prev == -1 ? index : prev), d, nums, dp);
 
-  if (prev != -1)
-    dp[index][prev] = max(pick, notPick);
+//   if (prev != -1)
+//     dp[index][prev] = max(pick, notPick);
 
-  return max(pick, notPick);
-}
+//   return max(pick, notPick);
+// }
 
 int main()
 {
   int n, d;
   cin >> n >> d;
   vector<vector<int>> nums(n, vector<int>(2)); // money, friendship factor
-  vector<vector<ll>> dp(n + 1, vector<ll>(n + 1, -1));
+  vector<vector<ll>> dp(n + 1, vector<ll>(n + 1, 0));
 
   for (int i = 0; i < n; i++)
   {
@@ -36,7 +36,30 @@ int main()
   }
   sort(nums.begin(), nums.end());
 
-  ll ans = fn(0, -1, d, nums, dp);
+  for (int index = n - 1; index >= 0; index--)
+  {
+    for (int prevIndex = 0; prevIndex <= n; prevIndex++)
+    {
+      int prev = prevIndex - 1;
+
+      // if (prev != -1 && nums[index][0] - nums[prev][0] >= d) then state returns 0
+      if (prev != -1 && nums[index][0] - nums[prev][0] >= d)
+      {
+        dp[index][prevIndex] = 0;
+        continue;
+      }
+
+      ll notPick = dp[index + 1][prevIndex];
+
+      int newPrev = prev == -1 ? index : prev;
+      int newPrevIndex = newPrev + 1;
+      ll pick = nums[index][1] + dp[index + 1][newPrevIndex];
+
+      dp[index][prevIndex] = max(pick, notPick);
+    }
+  }
+
+  ll ans = dp[0][0];
   cout << ans << endl;
 
   return 0;
