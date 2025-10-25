@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/1542/B
 // Plus and Multiply
-// Codeforces 1542B -> Plus and Multiply
 
 #include <bits/stdc++.h>
 using namespace std;
