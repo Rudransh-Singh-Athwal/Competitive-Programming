@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/112/A
 // Petya and Strings
-// Codeforces 112A -> Petya and Strings
 
 #include <bits/stdc++.h>
 using namespace std;
