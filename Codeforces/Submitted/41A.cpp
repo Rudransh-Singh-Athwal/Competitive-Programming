@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/41/A
 // Translation
-// Codeforces 41A -> Translation
 
 #include <bits/stdc++.h>
 using namespace std;
