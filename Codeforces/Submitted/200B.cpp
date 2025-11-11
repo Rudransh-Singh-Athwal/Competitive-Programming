@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/200/B
 // Drinks
-// Codeforces 200B -> Drinks
 
 #include <bits/stdc++.h>
 using namespace std;
