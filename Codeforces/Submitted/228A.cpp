@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/228/A
 // Is your horseshoe on the other hoof?
-// Codeforces 228A -> Is your horseshoe on the other hoof?
 
 #include <bits/stdc++.h>
 using namespace std;
