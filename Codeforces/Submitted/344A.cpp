@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/344/A
 // Magnets
-// Codeforces 344A -> Magnets
 
 #include <bits/stdc++.h>
 using namespace std;
