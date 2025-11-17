@@ -1,6 +1,5 @@
 // https://codeforces.com/problemset/problem/467/A
 // George and Accommodation
-// Codeforces 467A -> George and Accommodation
 
 #include <bits/stdc++.h>
 using namespace std;
